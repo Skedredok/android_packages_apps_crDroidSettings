@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016-2021 crDroid Android Project
+ * Copyright (C) 2016-2022 crDroid Android Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,7 @@ import com.android.settingslib.search.SearchIndexable;
 
 import com.crdroid.settings.fragments.statusbar.BatteryBar;
 import com.crdroid.settings.fragments.statusbar.Clock;
+import com.crdroid.settings.fragments.statusbar.NetworkTrafficSettings;
 import com.crdroid.settings.preferences.SystemSettingSeekBarPreference;
 import com.crdroid.settings.utils.DeviceUtils;
 import com.crdroid.settings.utils.TelephonyUtils;
@@ -65,6 +66,8 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private static final String KEY_SHOW_ROAMING = "roaming_indicator_icon";
     private static final String KEY_SHOW_FOURG = "show_fourg_icon";
     private static final String KEY_SHOW_DATA_DISABLED = "data_disabled_icon";
+    private static final String KEY_COMBINED_ICONS = "combined_status_bar_signal_icons";
+    private static final String KEY_USE_OLD_MOBILETYPE = "use_old_mobiletype";
     private static final String KEY_STATUS_BAR_SHOW_BATTERY_PERCENT = "status_bar_show_battery_percent";
     private static final String KEY_STATUS_BAR_BATTERY_STYLE = "status_bar_battery_style";
     private static final String KEY_STATUS_BAR_BATTERY_TEXT_CHARGING = "status_bar_battery_text_charging";
@@ -89,6 +92,8 @@ public class StatusBar extends SettingsPreferenceFragment implements
     private SwitchPreference mShowRoaming;
     private SwitchPreference mShowFourg;
     private SwitchPreference mDataDisabled;
+    private SwitchPreference mCombinedIcons;
+    private SwitchPreference mOldMobileType;
     private SwitchPreference mBatteryTextCharging;
 
     @Override
@@ -97,6 +102,7 @@ public class StatusBar extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.crdroid_settings_statusbar);
 
+        ContentResolver resolver = getActivity().getContentResolver();
         Context mContext = getActivity().getApplicationContext();
 
         final PreferenceScreen prefScreen = getPreferenceScreen();
@@ -124,6 +130,8 @@ public class StatusBar extends SettingsPreferenceFragment implements
         mShowRoaming = (SwitchPreference) findPreference(KEY_SHOW_ROAMING);
         mShowFourg = (SwitchPreference) findPreference(KEY_SHOW_FOURG);
         mDataDisabled = (SwitchPreference) findPreference(KEY_SHOW_DATA_DISABLED);
+        mCombinedIcons = (SwitchPreference) findPreference(KEY_COMBINED_ICONS);
+        mOldMobileType = (SwitchPreference) findPreference(KEY_USE_OLD_MOBILETYPE);
 
         if (!TelephonyUtils.isVoiceCapable(getActivity())) {
             prefScreen.removePreference(mVolteIconStyle);
@@ -132,6 +140,15 @@ public class StatusBar extends SettingsPreferenceFragment implements
             prefScreen.removePreference(mShowRoaming);
             prefScreen.removePreference(mShowFourg);
             prefScreen.removePreference(mDataDisabled);
+            prefScreen.removePreference(mCombinedIcons);
+            prefScreen.removePreference(mOldMobileType);
+        } else {
+            boolean mConfigUseOldMobileType = mContext.getResources().getBoolean(
+                    com.android.internal.R.bool.config_useOldMobileIcons);
+            boolean showing = Settings.System.getIntForUser(resolver,
+                    Settings.System.USE_OLD_MOBILETYPE,
+                    mConfigUseOldMobileType ? 1 : 0, UserHandle.USER_CURRENT) != 0;
+            mOldMobileType.setChecked(showing);
         }
 
         int batterystyle = Settings.System.getIntForUser(getContentResolver(),
@@ -199,12 +216,21 @@ public class StatusBar extends SettingsPreferenceFragment implements
 
     public static void reset(Context mContext) {
         ContentResolver resolver = mContext.getContentResolver();
+        boolean mConfigUseOldMobileType = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_useOldMobileIcons);
+
         LineageSettings.System.putIntForUser(resolver,
                 LineageSettings.System.DOUBLE_TAP_SLEEP_GESTURE, 1, UserHandle.USER_CURRENT);
         LineageSettings.System.putIntForUser(resolver,
                 LineageSettings.System.STATUS_BAR_QUICK_QS_PULLDOWN, 0, UserHandle.USER_CURRENT);
         LineageSettings.System.putIntForUser(resolver,
                 LineageSettings.System.STATUS_BAR_CLOCK, 2, UserHandle.USER_CURRENT);
+        LineageSettings.System.putIntForUser(resolver,
+                LineageSettings.System.STATUS_BAR_BRIGHTNESS_CONTROL, 0, UserHandle.USER_CURRENT);
+        Settings.Secure.putIntForUser(resolver,
+                Settings.Secure.ENABLE_CAMERA_PRIVACY_INDICATOR, 1, UserHandle.USER_CURRENT);
+        Settings.Secure.putIntForUser(resolver,
+                Settings.Secure.ENABLE_LOCATION_PRIVACY_INDICATOR, 1, UserHandle.USER_CURRENT);
         Settings.System.putIntForUser(resolver,
                 Settings.System.VOLTE_ICON_STYLE, 0, UserHandle.USER_CURRENT);
         Settings.System.putIntForUser(resolver,
@@ -227,9 +253,18 @@ public class StatusBar extends SettingsPreferenceFragment implements
                 Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENT, 0, UserHandle.USER_CURRENT);
         Settings.System.putIntForUser(resolver,
                 Settings.System.STATUS_BAR_BATTERY_TEXT_CHARGING, 1, UserHandle.USER_CURRENT);
+        Settings.System.putIntForUser(resolver,
+                Settings.System.STATUSBAR_COLORED_ICONS, 0, UserHandle.USER_CURRENT);
+        Settings.System.putIntForUser(resolver,
+                Settings.System.STATUSBAR_NOTIF_COUNT, 0, UserHandle.USER_CURRENT);
+        Settings.System.putIntForUser(resolver,
+                Settings.System.USE_OLD_MOBILETYPE, mConfigUseOldMobileType ? 1 : 0, UserHandle.USER_CURRENT);
+        Settings.System.putIntForUser(resolver,
+                Settings.System.COMBINED_STATUS_BAR_SIGNAL_ICONS, 0, UserHandle.USER_CURRENT);
 
         BatteryBar.reset(mContext);
         Clock.reset(mContext);
+        NetworkTrafficSettings.reset(mContext);
     }
 
     private void updateQuickPulldownSummary(int value) {
@@ -293,6 +328,8 @@ public class StatusBar extends SettingsPreferenceFragment implements
                         keys.add(KEY_SHOW_ROAMING);
                         keys.add(KEY_SHOW_FOURG);
                         keys.add(KEY_SHOW_DATA_DISABLED);
+                        keys.add(KEY_COMBINED_ICONS);
+                        keys.add(KEY_USE_OLD_MOBILETYPE);
                     }
 
                     return keys;

@@ -36,6 +36,47 @@
             android:action="org.lineageos.settings.device.DOZE_SETTINGS" />
     </lineageos.preference.RemotePreference>
 
+    <com.crdroid.settings.preferences.SecureSettingSwitchPreference
+        android:key="pulse_on_new_tracks"
+        android:title="@string/pulse_on_new_tracks_title"
+        android:summary="@string/pulse_on_new_tracks_summary" />
+
+    <PreferenceCategory
+        android:key="edge_lighting"
+        android:title="@string/pulse_ambient_light_title" >
+
+        <com.crdroid.settings.preferences.SecureSettingSwitchPreference
+            android:key="pulse_ambient_light"
+            android:title="@string/pulse_ambient_light_title"
+            android:summary="@string/pulse_ambient_light_summary"
+            android:dependency="doze_enabled" />
+
+        <com.crdroid.settings.preferences.SecureSettingListPreference
+            android:key="pulse_ambient_light_layout"
+            android:title="@string/pulse_ambient_light_layout_title"
+            android:entries="@array/pulse_ambient_light_layout_entries"
+            android:entryValues="@array/pulse_ambient_light_layout_values"
+            android:defaultValue="0"
+            android:dependency="pulse_ambient_light" />
+
+        <com.crdroid.settings.preferences.colorpicker.SecureSettingColorPickerPreference
+            android:key="pulse_ambient_light_color"
+            android:title="@string/pulse_ambient_light_color_title"
+            android:dependency="pulse_ambient_light"
+            android:defaultValue="0xFF3980FF" />
+
+        <com.crdroid.settings.preferences.SecureSettingSeekBarPreference
+            android:key="pulse_ambient_light_duration"
+            android:title="@string/pulse_ambient_light_duration_title"
+            android:summary="@string/pulse_ambient_light_duration_summary"
+            android:defaultValue="2"
+            android:max="10"
+            settings:min="1"
+            settings:units="@string/unit_seconds"
+            settings:interval="1"
+            android:dependency="pulse_ambient_light" />
+    </PreferenceCategory>
+
     <PreferenceCategory
         android:key="doze_sensor"
         android:title="@string/doze_sensor_title" >
@@ -63,6 +104,12 @@
             android:defaultValue="false"
             android:title="@string/pocket_title"
             android:summary="@string/pocket_summary" />
+
+        <com.crdroid.settings.preferences.SecureSettingSwitchPreference
+            android:key="raise_to_wake_gesture"
+            android:defaultValue="false"
+            android:title="@string/raise_to_wake_title"
+            android:summary="@string/raise_to_wake_summary" />
 
         <com.crdroid.settings.preferences.SecureSettingSeekBarPreference
             android:key="doze_gesture_vibrate"

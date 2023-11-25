@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2016-2021 crDroid Android Project
+     Copyright (C) 2016-2022 crDroid Android Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -184,6 +184,8 @@
     <!-- Status bar - Battery -->
     <string-array name="status_bar_battery_style_entries" translatable="false">
         <item>@string/status_bar_battery_style_icon_portrait</item> 
+        <item>@string/status_bar_battery_style_icon_rlandscape</item> 
+        <item>@string/status_bar_battery_style_icon_landscape</item> 
         <item>@string/status_bar_battery_style_circle</item>
         <item>@string/status_bar_battery_style_dotted_circle</item>
         <item>@string/status_bar_battery_style_filled_circle</item>
@@ -193,6 +195,8 @@
 
     <string-array name="status_bar_battery_style_values" translatable="false">
         <item>0</item>
+        <item>6</item>
+        <item>7</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -203,13 +207,15 @@
     <string-array name="status_bar_battery_percent_entries">
         <item>@string/status_bar_battery_percent_hidden</item>
         <item>@string/status_bar_battery_percent_text_inside</item>
-        <item>@string/status_bar_battery_percent_text_next</item>
+        <item>@string/status_bar_battery_percent_text_next_right</item>
+        <item>@string/status_bar_battery_percent_text_next_left</item>
     </string-array>
 
     <string-array name="status_bar_battery_percent_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 
     <!-- Status bar - Battery Bar -->
@@ -229,6 +235,8 @@
     <string-array name="qs_battery_style_entries" translatable="false">
         <item>@string/qs_use_status_bar_battery_style</item>
         <item>@string/status_bar_battery_style_icon_portrait</item> 
+        <item>@string/status_bar_battery_style_icon_rlandscape</item> 
+        <item>@string/status_bar_battery_style_icon_landscape</item> 
         <item>@string/status_bar_battery_style_circle</item>
         <item>@string/status_bar_battery_style_dotted_circle</item>
         <item>@string/status_bar_battery_style_filled_circle</item>
@@ -239,6 +247,8 @@
     <string-array name="qs_battery_style_values" translatable="false">
         <item>-1</item>
         <item>0</item>
+        <item>6</item>
+        <item>7</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -255,5 +265,320 @@
     <string-array name="qs_battery_location_values" translatable="false">
         <item>0</item>
         <item>1</item>
+    </string-array>
+
+    <!-- Network Traffic -->
+    <string-array name="network_traffic_location_entries" translatable="false">
+        <item>@string/network_traffic_location_disable</item>
+        <item>@string/network_traffic_location_statusbar</item>
+        <item>@string/network_traffic_location_quick_statusbar</item>
+    </string-array>
+
+    <string-array name="network_traffic_location_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="network_traffic_mode_entries" translatable="false">
+        <item>@string/network_traffic_mode_all</item>
+        <item>@string/network_traffic_mode_up</item>
+        <item>@string/network_traffic_mode_down</item>
+    </string-array>
+
+    <string-array name="network_traffic_mode_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="network_traffic_units_entries" translatable="false">
+        <item>@string/network_traffic_units_bits</item>
+        <item>@string/network_traffic_units_bytes</item>
+    </string-array>
+
+    <string-array name="network_traffic_units_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- Ambient edge lighting -->
+    <string-array name="pulse_ambient_light_layout_entries">
+        <item>@string/pulse_ambient_light_layout_solid</item>
+        <item>@string/pulse_ambient_light_layout_faded</item>
+    </string-array>
+
+    <string-array name="pulse_ambient_light_layout_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Lockscreen album art filter -->
+    <string-array name="lockscreen_albumart_filter_entries">
+        <item>@string/lockscreen_albumart_filter_none</item>
+        <item>@string/lockscreen_albumart_filter_grayscale</item>
+        <item>@string/lockscreen_albumart_filter_tint</item>
+        <item>@string/lockscreen_albumart_filter_blur</item>
+        <item>@string/lockscreen_albumart_filter_grayblur</item>
+    </string-array>
+
+    <string-array name="lockscreen_albumart_filter_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- Pulse music visualizer -->
+    <string-array name="pulse_render_mode_entries">
+       <item>@string/pulse_render_mode_fading_bars</item>
+       <item>@string/pulse_render_mode_solid_lines</item>
+    </string-array>
+
+    <string-array name="pulse_render_mode_values" translatable="false">
+      <item>0</item>
+      <item>1</item>
+    </string-array>
+
+    <string-array name="pulse_color_mode_entries">
+       <item>@string/pulse_color_accent</item>
+       <item>@string/pulse_color_custom</item>
+       <item>@string/pulse_color_lava_lamp</item>
+    </string-array>
+
+    <string-array name="pulse_color_mode_values" translatable="false">
+      <item>0</item>
+      <item>1</item>
+      <item>2</item>
+    </string-array>
+
+    <!-- Hardware key rebinding -->
+    <string-array name="hardware_keys_action_entries" translatable="false">
+        <item>@string/hardware_keys_action_nothing</item>
+        <item>@string/hardware_keys_action_menu</item>
+        <item>@string/hardware_keys_action_app_switch</item>
+        <item>@string/hardware_keys_action_search</item>
+        <item>@string/hardware_keys_action_voice_search</item>
+        <item>@string/hardware_keys_action_in_app_search</item>
+        <item>@string/hardware_keys_action_launch_camera</item>
+        <item>@string/hardware_keys_action_sleep</item>
+        <item>@string/hardware_keys_action_last_app</item>
+        <item>@string/hardware_keys_action_split_screen</item>
+        <item>@string/hardware_keys_action_close_app</item>
+        <item>@string/hardware_keys_action_torch</item>
+        <item>@string/hardware_keys_action_screenshot</item>
+        <item>@string/hardware_keys_action_volume_panel</item>
+        <item>@string/hardware_keys_action_clear_all_notifications</item>
+        <item>@string/hardware_keys_action_notifications_panel</item>
+        <item>@string/hardware_keys_action_expand_qs_panel</item>
+        <item>@string/hardware_keys_action_ringer_modes</item>
+    </string-array>
+
+    <string-array name="hardware_keys_action_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+    </string-array>
+
+    <!-- Volume key cursor control -->
+    <string-array name="volbtn_cursor_control_entries" translatable="false">
+        <item>@string/volbtn_cursor_control_off</item>
+        <item>@string/volbtn_cursor_control_on</item>
+        <item>@string/volbtn_cursor_control_on_reverse</item>
+    </string-array>
+
+    <string-array name="volbtn_cursor_control_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- SysUI Tuner: Labels for different types of navigation bar layouts [CHAR LIMIT=60] -->
+    <string-array name="navbar_layout_entries">
+        <item>@string/navbar_layout_normal</item>
+        <item>@string/navbar_layout_compact</item>
+        <item>@string/navbar_layout_leftleaning</item>
+        <item>@string/navbar_layout_rightleaning</item>
+    </string-array>
+
+    <string-array name="navbar_layout_values" translatable="false">
+        <item>default</item>
+        <item>left;back,home,recent;right</item>
+        <item>left,back,home,recent,right;space;space</item>
+        <item>space;space;left,back,home,recent,right</item>
+    </string-array>
+
+    <!-- Volume step options. -->
+    <string-array name="volume_steps_entries" translatable="false">
+        <item>@string/volume_steps_60</item>
+        <item>@string/volume_steps_45</item>
+        <item>@string/volume_steps_30</item>
+        <item>@string/volume_steps_15</item>
+        <item>@string/volume_steps_7</item>
+        <item>@string/volume_steps_5</item>
+    </string-array>
+
+    <!-- Quick Settings brightness slider -->
+    <string-array name="qs_show_brightness_slider_entries" translatable="false">
+        <item>@string/qs_show_brightness_slider_never</item>
+        <item>@string/qs_show_brightness_slider_expanded</item>
+        <item>@string/qs_show_brightness_slider_always</item>
+        <item>@string/qs_show_brightness_slider_not_expanded</item>
+    </string-array>
+
+    <string-array name="qs_show_brightness_slider_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="qs_brightness_slider_position_entries" translatable="false">
+        <item>@string/qs_brightness_slider_position_top</item>
+        <item>@string/qs_brightness_slider_position_bottom</item>
+    </string-array>
+
+    <string-array name="qs_brightness_slider_position_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Values for the notification light pulse spinners -->
+    <string-array name="notification_pulse_length_entries" translatable="false">
+        <item>@string/pulse_length_always_on</item>
+        <item>@string/pulse_length_very_short</item>
+        <item>@string/pulse_length_short</item>
+        <item>@string/pulse_length_normal</item>
+        <item>@string/pulse_length_long</item>
+        <item>@string/pulse_length_very_long</item>
+    </string-array>
+
+    <string-array name="notification_pulse_length_values" translatable="false">
+        <item>1</item>
+        <item>250</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>5000</item>
+    </string-array>
+
+    <string-array name="notification_pulse_speed_entries" translatable="false">
+        <item>@string/pulse_speed_very_fast</item>
+        <item>@string/pulse_speed_fast</item>
+        <item>@string/pulse_speed_normal</item>
+        <item>@string/pulse_speed_slow</item>
+        <item>@string/pulse_speed_very_slow</item>
+    </string-array>
+
+    <string-array name="notification_pulse_speed_values" translatable="false">
+        <item>250</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>5000</item>
+    </string-array>
+
+    <!-- Blink flashlight for incoming calls -->
+    <string-array name="flashlight_on_call_entries">
+        <item>@string/flashlight_on_call_disabled</item>
+        <item>@string/flashlight_on_call_ringer</item>
+        <item>@string/flashlight_on_call_no_ringer</item>
+        <item>@string/flashlight_on_call_silent</item>
+        <item>@string/flashlight_on_call_always</item>
+    </string-array>
+
+    <string-array name="flashlight_on_call_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <!-- Screen off animation -->
+    <string-array name="screen_off_animation_entries">
+        <item>@string/screen_off_animation_default</item>
+        <item>@string/screen_off_animation_crt</item>
+        <item>@string/screen_off_animation_scale</item>
+    </string-array>
+
+    <string-array name="screen_off_animation_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <!-- Legacy WFD settings -->
+    <string-array name="legacy_wfd_video_mode_entries" translatable="false">
+        <item>@string/legacy_wfd_video_mode_720p_30fps</item>
+        <item>@string/legacy_wfd_video_mode_720p_60fps</item>
+        <item>@string/legacy_wfd_video_mode_1080p_30fps</item>
+        <item>@string/legacy_wfd_video_mode_1080p_60fps</item>
+    </string-array>
+
+    <string-array name="legacy_wfd_video_mode_values" translatable="false">
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <!-- Face Unlock -->
+    <string-array name="face_unlock_method_entries">
+        <item>@string/face_unlock_method_default</item>
+        <item>@string/face_unlock_method_swipe</item>
+    </string-array>
+    <string-array name="face_unlock_method_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Custom timeout for Wifi/Bluetooth -->
+    <string-array name="custom_timeout_entries">
+        <item>@string/custom_timeout_summary_never</item>
+        <item>@string/custom_timeout_summary_15secs</item>
+        <item>@string/custom_timeout_summary_30secs</item>
+        <item>@string/custom_timeout_summary_1min</item>
+        <item>@string/custom_timeout_summary_2mins</item>
+        <item>@string/custom_timeout_summary_5mins</item>
+        <item>@string/custom_timeout_summary_10mins</item>
+        <item>@string/custom_timeout_summary_30mins</item>
+        <item>@string/custom_timeout_summary_1hour</item>
+        <item>@string/custom_timeout_summary_2hours</item>
+        <item>@string/custom_timeout_summary_4hours</item>
+        <item>@string/custom_timeout_summary_8hours</item>
+    </string-array>
+
+    <string-array name="custom_timeout_values" translatable="false">
+        <item>0</item>
+        <item>15000</item>
+        <item>30000</item>
+        <item>60000</item>
+        <item>120000</item>
+        <item>300000</item>
+        <item>600000</item>
+        <item>1800000</item>
+        <item>3600000</item>
+        <item>7200000</item>
+        <item>14400000</item>
+        <item>28800000</item>
     </string-array>
 </resources>
